@@ -37,6 +37,7 @@ public class PersonaDaoImp implements PersonaDao {
 	@Override
 	public int update(Persona persona) {
 		// TODO Auto-generated method stub
+		System.out.println("se va a editar " + persona.getNombre());
 		return jdbcTemplate.update("call PKG_PERSONA.PR_UPD_PERSONA(?,?,?,?,?,?,?,?,?,?)", persona.getIdpersona(), persona.getNombre(), 
 				persona.getApellidos(), persona.getDni(), persona.getFec_nacimiento(), persona.getCelular(),
 				persona.getCorreo(), persona.getUsuario(), persona.getClave(), persona.getIdestado_civil());
@@ -52,7 +53,7 @@ public class PersonaDaoImp implements PersonaDao {
 	public Map<String, Object> read(int id) {
 		// TODO Auto-generated method stub
 		System.out.println(id);
-		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withCatalogName("PKG_PERSONA").withProcedureName("PR_BUS_PERSONA")
+		simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("PR_BUS_PERSONA").withCatalogName("PKG_PERSONA")
 														 .declareParameters(new SqlOutParameter("CUR_PERSONA", OracleTypes.CURSOR,
 														  new ColumnMapRowMapper()), new SqlParameter("IDPERSONA", Types.INTEGER));
 		SqlParameterSource in = new MapSqlParameterSource().addValue("IDPERSONA", id);

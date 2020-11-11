@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pe.edu.upeu.proyecto.entity.Persona;
 import pe.edu.upeu.proyecto.service.PersonaService;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = " ")
 @RestController
 @RequestMapping("/persona")
 public class PersonaController {
@@ -26,30 +26,29 @@ public class PersonaController {
 	private PersonaService personaService;
 	
 	@GetMapping("/all")
-	/*public Map<String, Object> realAll() {
-		return personaService.readAll();
-	}*/
+	//este metodo permite listar todas las personas
 	public Map<String, Object> get(){
 		return personaService.readAll();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/all/{id}")
+	//este metodo permite buscar una persona
 	public Map<String, Object> read(@PathVariable int id) {
 		return personaService.read(id);
 	}
 	@PostMapping("/add")
-	//este metodo permite registrar una competencia
+	//este metodo permite registrar una persona
 	public int create(@RequestBody Persona c) {
-		return personaService.create(c);		
+		return personaService.create(c);
 	}
 	@DeleteMapping("/delete/{id}")
-	//este metodo permite eliminar una competencia
+	//este metodo permite eliminar una persona
 	public int delete(@PathVariable int id) {
 		return personaService.delete(id);
 	}	
 	
-	@PutMapping("/edit/{id}")
-	//este metodo permite modificar una competencia
+	@PutMapping("/update/{id}")
+	//este metodo permite modificar una persona
     public int update(@RequestBody Persona c,@PathVariable int id) {
 		c.setIdpersona(id);
 		
